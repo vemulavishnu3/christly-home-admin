@@ -403,7 +403,7 @@ export default function ChurchOnboardingPage() {
         </div>
       ) : (
         /* Registration Form */
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <form className="onboarding-form" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
           {/* SECTION 1: BASIC INFORMATION */}
           <div style={{
             backgroundColor: '#FFFFFF',
@@ -749,6 +749,7 @@ export default function ChurchOnboardingPage() {
               {serviceTimings.map((st, i) => (
                 <div
                   key={st.id}
+                  className="service-timing-row"
                   style={{
                     display: 'grid',
                     gridTemplateColumns: '120px 140px 1fr 140px 140px 40px',

@@ -28,7 +28,7 @@ export default function ChurchMapView({ churches, onSelectChurch }: ChurchMapVie
   };
 
   return (
-    <div style={{
+    <div className="church-map-view" style={{
       position: 'relative',
       width: '100%',
       height: 600,
@@ -41,7 +41,7 @@ export default function ChurchMapView({ churches, onSelectChurch }: ChurchMapVie
       flexDirection: 'column'
     }}>
       {/* Top Map Toolbar */}
-      <div style={{
+      <div className="church-map-toolbar" style={{
         position: 'absolute',
         top: 16,
         left: 16,
@@ -73,7 +73,7 @@ export default function ChurchMapView({ churches, onSelectChurch }: ChurchMapVie
           </span>
         </div>
         <div style={{ height: 16, width: 1, backgroundColor: '#E5E7EB' }} />
-        <div style={{ display: 'flex', gap: 12, fontSize: 12, color: 'var(--color-warm-gray)' }}>
+        <div className="church-map-legend" style={{ display: 'flex', gap: 12, fontSize: 12, color: 'var(--color-warm-gray)' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
             <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#5B2D8E', display: 'inline-block' }} />
             Verified
@@ -233,7 +233,7 @@ export default function ChurchMapView({ churches, onSelectChurch }: ChurchMapVie
 
       {/* Selected Church Detail Card Overlay */}
       {selectedChurch && (
-        <div style={{
+        <div className="church-map-selected-card" style={{
           position: 'absolute',
           bottom: 16,
           left: 16,

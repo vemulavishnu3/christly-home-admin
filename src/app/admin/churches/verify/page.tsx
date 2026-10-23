@@ -163,7 +163,7 @@ export default function VerifyChurchesPage() {
         </div>
 
         {/* View Filter Pill */}
-        <div style={{
+        <div className="verification-mode-tabs" style={{
           display: 'inline-flex',
           backgroundColor: '#F3F4F6',
           borderRadius: 10,
@@ -309,6 +309,7 @@ export default function VerifyChurchesPage() {
               {pendingChurches.map((church) => (
                 <div
                   key={church.id}
+                  className="verification-card"
                   style={{
                     backgroundColor: '#FFFFFF',
                     borderRadius: 16,
@@ -358,7 +359,7 @@ export default function VerifyChurchesPage() {
                         {church.denomination} • Founded {church.founded} • Senior Pastor: <b>{church.pastor}</b>
                       </p>
 
-                      <div style={{ display: 'flex', gap: 16, fontSize: 13, color: 'var(--color-warm-gray)', margin: '8px 0 14px' }}>
+                      <div className="verification-card-contact" style={{ display: 'flex', gap: 16, fontSize: 13, color: 'var(--color-warm-gray)', margin: '8px 0 14px' }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                           <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
                           {church.address}, {church.city}, {church.state} - {church.pincode}
@@ -388,6 +389,7 @@ export default function VerifyChurchesPage() {
                           {church.documents.map((doc) => (
                             <div
                               key={doc.id}
+                              className="verification-doc-card"
                               style={{
                                 display: 'flex',
                                 alignItems: 'center',
@@ -430,7 +432,7 @@ export default function VerifyChurchesPage() {
                       </div>
 
                       {/* Action Buttons */}
-                      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                      <div className="verification-card-actions" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                         <button
                           onClick={() => handleApprove(church)}
                           style={{

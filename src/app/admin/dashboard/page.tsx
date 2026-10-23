@@ -1,21 +1,44 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Church, ShieldCheck, PlusCircle, ClipboardList, ArrowRight, Radio, Users } from 'lucide-react';
+import { Church, ShieldCheck, PlusCircle, ClipboardList, ArrowRight, RotateCcw } from 'lucide-react';
 import { getStoredChurches } from '../../../data/mockChurches';
 import VerifiedBadge from '../../../components/churches/VerifiedBadge';
+import { Church as ChurchRecord } from '../../../types/church';
 
 export default function DashboardPage() {
-  const [churches, setChurches] = useState<any[]>([]);
+  const [churches, setChurches] = useState<ChurchRecord[]>([]);
+  const [isLoadingChurches, setIsLoadingChurches] = useState(true);
+  const [churchLoadError, setChurchLoadError] = useState<string | null>(null);
+  const [churchesUpdatedAt, setChurchesUpdatedAt] = useState<Date | null>(null);
+
+  const refreshChurches = useCallback(() => {
+    setIsLoadingChurches(true);
+    try {
+      setChurches(getStoredChurches());
+      setChurchLoadError(null);
+      setChurchesUpdatedAt(new Date());
+    } catch (error) {
+      console.error('Unable to load prototype church metrics:', error);
+      setChurchLoadError('Church records could not be read from this browser.');
+    } finally {
+      setIsLoadingChurches(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const list = getStoredChurches();
-    setChurches(list);
-  }, []);
+    refreshChurches();
+    window.addEventListener('churches_updated', refreshChurches);
+    window.addEventListener('storage', refreshChurches);
+    return () => {
+      window.removeEventListener('churches_updated', refreshChurches);
+      window.removeEventListener('storage', refreshChurches);
+    };
+  }, [refreshChurches]);
 
   const verifiedCount = churches.filter(c => c.verificationStatus === 'approved').length;
   const pendingCount = churches.filter(c => c.verificationStatus === 'pending').length;
-  const liveCount = churches.filter(c => c.isLive).length;
+  const rejectedCount = churches.filter(c => c.verificationStatus === 'rejected').length;
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', paddingBottom: 40 }}>
@@ -28,32 +51,57 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      {/* Primary KPI Stats Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginBottom: 28 }}>
-        {[
-          { label: 'Total Platform Users', value: '12,847', color: 'var(--color-primary)', href: '/admin/users' },
-          { label: 'Verified Churches', value: verifiedCount, color: 'var(--color-secondary)', href: '/admin/churches' },
-          { label: 'Live Sessions', value: liveCount, color: '#10B981', href: '/admin/churches' },
-          { label: 'Total Donations', value: '₹18,42,500', color: '#3B82F6', href: '/admin/donations' },
-        ].map(stat => (
-          <Link
-            key={stat.label}
-            href={stat.href}
-            style={{
-              background: 'white',
-              padding: 22,
-              borderRadius: 16,
-              borderLeft: `5px solid ${stat.color}`,
-              boxShadow: 'var(--shadow-card)',
-              textDecoration: 'none',
-              display: 'block',
-              transition: 'transform 0.15s ease'
-            }}
-          >
-            <p style={{ color: 'var(--color-warm-gray)', fontSize: 13, marginBottom: 6 }}>{stat.label}</p>
-            <h3 style={{ fontSize: 26, fontWeight: 700, color: 'var(--color-text)' }}>{stat.value}</h3>
-          </Link>
-        ))}
+      {/* Operational metrics: only church values have a local prototype data source. */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginBottom: 12 }}>
+        <MetricCard
+          label="Platform Users"
+          value="Not connected"
+          details="Registered and active user totals require an authenticated users database."
+          color="var(--color-primary)"
+          href="/admin/users"
+        />
+        <MetricCard
+          label="Churches"
+          value={isLoadingChurches ? 'Loading…' : churchLoadError ? 'Unavailable' : churches.length === 0 ? 'No records' : verifiedCount}
+          details={churchLoadError
+            ? churchLoadError
+            : isLoadingChurches
+              ? 'Reading local prototype records.'
+              : `Approved · ${verifiedCount}  |  Pending · ${pendingCount}  |  Rejected · ${rejectedCount}`}
+          color="var(--color-secondary)"
+          href="/admin/churches"
+        />
+        <MetricCard
+          label="Live Sessions"
+          value="Not connected"
+          details="Current session status and viewer counts require a live-session service."
+          color="#10B981"
+          href="/admin/churches"
+        />
+        <MetricCard
+          label="Donations"
+          value="Not connected"
+          details="Successful totals and payment statuses require a payment provider or donations database."
+          color="#3B82F6"
+          href="/admin/donations"
+        />
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', marginBottom: 28, color: 'var(--color-warm-gray)', fontSize: 12 }}>
+        <span>
+          Church totals use sample/localStorage prototype records only
+          {churchesUpdatedAt ? ` · Refreshed ${churchesUpdatedAt.toLocaleTimeString()}` : ''}.
+          Other metrics are unavailable until their backend integrations exist.
+        </span>
+        <button
+          type="button"
+          onClick={refreshChurches}
+          disabled={isLoadingChurches}
+          aria-label="Refresh prototype church metrics"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, minHeight: 40, padding: '6px 10px', borderRadius: 8, border: '1px solid var(--color-border)', background: 'white', color: 'var(--color-primary)', cursor: isLoadingChurches ? 'wait' : 'pointer' }}
+        >
+          <RotateCcw size={14} />
+          {isLoadingChurches ? 'Refreshing…' : 'Refresh'}
+        </button>
       </div>
 
       {/* Quick Access to Church Discovery & Verification Modules */}
@@ -267,7 +315,15 @@ export default function DashboardPage() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14 }}>
-          {churches.filter(c => c.verificationStatus === 'approved').slice(0, 3).map(c => (
+          {churchLoadError ? (
+            <div role="alert" style={{ padding: 16, color: '#991B1B', background: '#FEF2F2', borderRadius: 10 }}>
+              Featured church records are unavailable. Use Refresh to try again.
+            </div>
+          ) : isLoadingChurches ? (
+            <div role="status" style={{ padding: 16, color: 'var(--color-warm-gray)' }}>Loading local church records…</div>
+          ) : churches.filter(c => c.verificationStatus === 'approved').length === 0 ? (
+            <div style={{ padding: 16, color: 'var(--color-warm-gray)' }}>No approved church records are available in this browser.</div>
+          ) : churches.filter(c => c.verificationStatus === 'approved').slice(0, 3).map(c => (
             <div
               key={c.id}
               style={{
@@ -311,5 +367,39 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function MetricCard({
+  label,
+  value,
+  details,
+  color,
+  href
+}: {
+  label: string;
+  value: string | number;
+  details: string;
+  color: string;
+  href: string;
+}) {
+  return (
+    <Link
+      href={href}
+      style={{
+        background: 'white',
+        padding: 22,
+        borderRadius: 16,
+        borderLeft: `5px solid ${color}`,
+        boxShadow: 'var(--shadow-card)',
+        textDecoration: 'none',
+        display: 'block',
+        transition: 'transform 0.15s ease'
+      }}
+    >
+      <p style={{ color: 'var(--color-warm-gray)', fontSize: 13, marginBottom: 6 }}>{label}</p>
+      <h3 style={{ fontSize: 26, fontWeight: 700, color: 'var(--color-text)', margin: '0 0 8px' }}>{value}</h3>
+      <p style={{ color: 'var(--color-warm-gray)', fontSize: 12, lineHeight: 1.5, margin: 0 }}>{details}</p>
+    </Link>
   );
 }

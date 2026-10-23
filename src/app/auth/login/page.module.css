@@ -69,3 +69,25 @@
   text-align: left;
   color: var(--color-warm-gray);
 }
+
+@media (max-width: 767px) {
+  .container {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 28px 20px;
+  }
+
+  .title {
+    font-size: 21px;
+  }
+
+  .inputGroup label {
+    font-size: 13px;
+  }
+
+  .demoInfo {
+    font-size: 12px;
+  }
+}

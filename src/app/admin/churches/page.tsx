@@ -50,7 +50,7 @@ export default function ChurchesPage() {
       setChurches(data);
       setLoadError(null);
     } catch {
-      setLoadError('Could not load demo church records from local storage.');
+      setLoadError('Could not load church records from local storage.');
     } finally {
       setIsLoading(false);
     }
@@ -213,7 +213,7 @@ export default function ChurchesPage() {
       )}
 
       {/* Page Header */}
-      <div style={{
+      <div className="church-directory-header" style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -226,11 +226,11 @@ export default function ChurchesPage() {
             Church Discovery &amp; Management
           </h1>
           <p style={{ fontSize: 14, color: 'var(--color-warm-gray)', marginTop: 4 }}>
-            {churches.length} demo churches • {verifiedCount} approved • {pendingCount} pending review. Records are labelled [DEMO] and stored in this browser only.
+            {churches.length} church records • {verifiedCount} approved • {pendingCount} pending review. Sample records are stored in this browser only.
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+        <div className="church-directory-header-actions" style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           {/* Quick link to Verification Queue */}
           <Link
             href="/admin/churches/verify"
@@ -288,7 +288,7 @@ export default function ChurchesPage() {
       </div>
 
       {/* Main Container Card */}
-      <div style={{
+      <div className="church-directory-main-card" style={{
         backgroundColor: '#FFFFFF',
         borderRadius: 16,
         padding: 24,
@@ -296,7 +296,7 @@ export default function ChurchesPage() {
         border: '1px solid var(--color-border)'
       }}>
         {/* Status Tabs and View Mode Switcher */}
-        <div style={{
+        <div className="church-directory-controls" style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -307,7 +307,7 @@ export default function ChurchesPage() {
           gap: 16
         }}>
           {/* Status Tabs */}
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div className="church-status-tabs" style={{ display: 'flex', gap: 8 }}>
             {[
               { id: 'ALL', label: 'All Churches', count: churches.length },
               { id: 'approved', label: 'Approved', count: verifiedCount },
@@ -348,7 +348,7 @@ export default function ChurchesPage() {
           </div>
 
           {/* List View / Map View Toggle (FR-CHURCH-01) */}
-          <div style={{
+          <div className="church-view-toggle" style={{
             display: 'inline-flex',
             backgroundColor: '#F3F4F6',
             borderRadius: 10,
@@ -399,14 +399,14 @@ export default function ChurchesPage() {
         </div>
 
         {/* Filters & Search Toolbar (FR-CHURCH-01, FR-CHURCH-03) */}
-        <div style={{
+        <div className="church-filter-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: 12,
           marginBottom: 20
         }}>
           {/* Search Input */}
-          <div style={{
+          <div className="church-search-field" style={{
             position: 'relative',
             gridColumn: 'span 2'
           }}>
@@ -567,8 +567,62 @@ export default function ChurchesPage() {
           />
         ) : (
           /* LIST VIEW */
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <>
+          <div className="church-card-list">
+            {filteredChurches.length === 0 ? (
+              <div className="church-card">No churches match the selected criteria.</div>
+            ) : filteredChurches.map(church => (
+              <article className="church-card" key={church.id}>
+                <div className="church-card-heading">
+                  <div className="church-card-avatar" style={{ backgroundColor: church.avatarBg }}>
+                    {church.avatarInitials}
+                  </div>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div className="church-card-name">{church.name}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', marginTop: 5 }}>
+                      <VerifiedBadge church={church} size="sm" />
+                      {church.isLive && <span style={{ color: '#b42318', fontSize: 11, fontWeight: 700 }}>LIVE</span>}
+                    </div>
+                  </div>
+                </div>
+                <div className="church-card-meta">
+                  <span>{church.city}, {church.state}</span>
+                  <span>{church.denomination}</span>
+                  <span>{church.distanceKm} km away</span>
+                  <span>{church.pastor}</span>
+                </div>
+                <div className="church-card-actions">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedChurch(church)}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 6, border: '1px solid var(--color-border)', background: '#fff', color: 'var(--color-primary)', fontWeight: 600 }}
+                  >
+                    <Eye size={15} /> Profile
+                  </button>
+                  {church.verificationStatus === 'pending' && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => handleApproveChurch(church)}
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, border: 0, background: '#15803d', color: '#fff', fontWeight: 600 }}
+                      >
+                        <CheckCircle size={15} /> Approve
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setChurchToReject(church)}
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, border: 0, background: '#b42318', color: '#fff', fontWeight: 600 }}
+                      >
+                        <XCircle size={15} /> Reject
+                      </button>
+                    </>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+          <div style={{ overflowX: 'auto', maxWidth: '100%' }}>
+            <table className="church-directory-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--color-border)', backgroundColor: '#FAFAF9' }}>
                   <th style={{ padding: '14px 16px', fontSize: 12, fontWeight: 700, color: 'var(--color-warm-gray)', textTransform: 'uppercase' }}>
@@ -808,6 +862,7 @@ export default function ChurchesPage() {
               </tbody>
             </table>
           </div>
+          </>
         )}
       </div>
 

@@ -4,7 +4,7 @@ import { normalizeChurch } from '../lib/verification';
 export const INITIAL_MOCK_CHURCHES: Church[] = [
   {
     id: 'c1',
-    name: '[DEMO] Eastside Fellowship',
+    name: 'Eastside Fellowship',
     denomination: 'Pentecostal',
     pastor: 'Demo Pastor A. Wilson',
     email: 'demo-eastside@example.test',
@@ -45,13 +45,13 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd3', name: '80G Tax Exemption Certificate', type: 'TAX_EXEMPTION', fileName: '80g_exemption.pdf', fileSize: '980 KB', uploadedAt: '2024-01-12', status: 'APPROVED' }
     ],
     auditTrail: [
-      { id: 'at-1', churchId: 'c1', churchName: '[DEMO] Eastside Fellowship', action: 'CHURCH_REGISTERED', reviewer: 'Demo System Onboarding', role: 'PORTAL_USER', timestamp: '2024-01-10 10:15', details: 'DEMO record: application submitted with sample verification documents' },
-      { id: 'at-2', churchId: 'c1', churchName: '[DEMO] Eastside Fellowship', action: 'CHURCH_VERIFIED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2024-01-15 14:30', details: 'DEMO record: sample approval for prototype review only' }
+      { id: 'at-1', churchId: 'c1', churchName: 'Eastside Fellowship', action: 'CHURCH_REGISTERED', reviewer: 'Demo System Onboarding', role: 'PORTAL_USER', timestamp: '2024-01-10 10:15', details: 'DEMO record: application submitted with sample verification documents' },
+      { id: 'at-2', churchId: 'c1', churchName: 'Eastside Fellowship', action: 'CHURCH_VERIFIED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2024-01-15 14:30', details: 'DEMO record: sample approval for prototype review only' }
     ]
   },
   {
     id: 'c2',
-    name: '[DEMO] Riverside Meeting',
+    name: 'Riverside Meeting',
     denomination: 'Baptist',
     pastor: 'Demo Pastor E. Raj',
     email: 'demo-riverside@example.test',
@@ -88,13 +88,13 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd5', name: 'Pastoral Council Endorsement', type: 'PASTOR_CREDENTIALS', fileName: 'council_endorsement.pdf', fileSize: '1.2 MB', uploadedAt: '2024-02-04', status: 'APPROVED' }
     ],
     auditTrail: [
-      { id: 'at-3', churchId: 'c2', churchName: '[DEMO] Riverside Meeting', action: 'CHURCH_REGISTERED', reviewer: 'Demo System Onboarding', role: 'PORTAL_USER', timestamp: '2024-02-04 11:20', details: 'DEMO record: sample application submitted' },
-      { id: 'at-4', churchId: 'c2', churchName: '[DEMO] Riverside Meeting', action: 'CHURCH_VERIFIED', reviewer: 'Demo Platform Admin', role: 'PLATFORM_ADMIN', timestamp: '2024-02-08 16:45', details: 'DEMO record: sample approval only' }
+      { id: 'at-3', churchId: 'c2', churchName: 'Riverside Meeting', action: 'CHURCH_REGISTERED', reviewer: 'Demo System Onboarding', role: 'PORTAL_USER', timestamp: '2024-02-04 11:20', details: 'DEMO record: sample application submitted' },
+      { id: 'at-4', churchId: 'c2', churchName: 'Riverside Meeting', action: 'CHURCH_VERIFIED', reviewer: 'Demo Platform Admin', role: 'PLATFORM_ADMIN', timestamp: '2024-02-08 16:45', details: 'DEMO record: sample approval only' }
     ]
   },
   {
     id: 'c3',
-    name: '[DEMO] Metro Gathering',
+    name: 'Metro Gathering',
     denomination: 'Non-Denominational',
     pastor: 'Demo Pastor P. Nair',
     email: 'demo-metro@example.test',
@@ -133,13 +133,13 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd7', name: 'Pastor Theological Degree & Ordination', type: 'PASTOR_CREDENTIALS', fileName: 'priya_nair_theology.pdf', fileSize: '1.5 MB', uploadedAt: '2024-01-20', status: 'APPROVED' }
     ],
     auditTrail: [
-      { id: 'at-5', churchId: 'c3', churchName: '[DEMO] Metro Gathering', action: 'CHURCH_REGISTERED', reviewer: 'Demo System Onboarding', role: 'PORTAL_USER', timestamp: '2024-01-20 09:12', details: 'DEMO record: submitted with sample documentation' },
-      { id: 'at-6', churchId: 'c3', churchName: '[DEMO] Metro Gathering', action: 'CHURCH_VERIFIED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2024-01-23 15:00', details: 'DEMO record: sample full verification' }
+      { id: 'at-5', churchId: 'c3', churchName: 'Metro Gathering', action: 'CHURCH_REGISTERED', reviewer: 'Demo System Onboarding', role: 'PORTAL_USER', timestamp: '2024-01-20 09:12', details: 'DEMO record: submitted with sample documentation' },
+      { id: 'at-6', churchId: 'c3', churchName: 'Metro Gathering', action: 'CHURCH_VERIFIED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2024-01-23 15:00', details: 'DEMO record: sample full verification' }
     ]
   },
   {
     id: 'c4',
-    name: '[DEMO] Harbour Parish',
+    name: 'Harbour Parish',
     denomination: 'Methodist',
     pastor: 'Demo Pastor A. Paul',
     email: 'demo-harbour@example.test',
@@ -173,12 +173,12 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd8', name: 'Methodist Conference Affiliation Certificate', type: 'MINISTRY_LICENSE', fileName: 'methodist_affiliation.pdf', fileSize: '2.0 MB', uploadedAt: '2024-02-15', status: 'APPROVED' }
     ],
     auditTrail: [
-      { id: 'at-7', churchId: 'c4', churchName: '[DEMO] Harbour Parish', action: 'CHURCH_VERIFIED', reviewer: 'Demo Platform Admin', role: 'PLATFORM_ADMIN', timestamp: '2024-02-18 10:00', details: 'DEMO record: sample affiliation check' }
+      { id: 'at-7', churchId: 'c4', churchName: 'Harbour Parish', action: 'CHURCH_VERIFIED', reviewer: 'Demo Platform Admin', role: 'PLATFORM_ADMIN', timestamp: '2024-02-18 10:00', details: 'DEMO record: sample affiliation check' }
     ]
   },
   {
     id: 'c5',
-    name: '[DEMO] North Ring Fellowship',
+    name: 'North Ring Fellowship',
     denomination: 'Pentecostal',
     pastor: 'Demo Pastor S. George',
     email: 'demo-northring@example.test',
@@ -210,12 +210,12 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd10', name: 'Pastor Pastoral Letter of Reference', type: 'PASTOR_CREDENTIALS', fileName: 'pastoral_reference.pdf', fileSize: '850 KB', uploadedAt: '2024-10-14', status: 'PENDING' }
     ],
     auditTrail: [
-      { id: 'at-8', churchId: 'c5', churchName: '[DEMO] North Ring Fellowship', action: 'CHURCH_REGISTERED', reviewer: 'Demo Applicant', role: 'APPLICANT', timestamp: '2024-10-14 16:40', details: 'DEMO record: pending sample application awaiting review.' }
+      { id: 'at-8', churchId: 'c5', churchName: 'North Ring Fellowship', action: 'CHURCH_REGISTERED', reviewer: 'Demo Applicant', role: 'APPLICANT', timestamp: '2024-10-14 16:40', details: 'DEMO record: pending sample application awaiting review.' }
     ]
   },
   {
     id: 'c6',
-    name: '[DEMO] Coastal Chapel',
+    name: 'Coastal Chapel',
     denomination: 'Non-Denominational',
     pastor: 'Demo Pastor M. Raju',
     email: 'demo-coastal@example.test',
@@ -249,12 +249,12 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd11', name: 'Calvary Global Network Charter', type: 'MINISTRY_LICENSE', fileName: 'cgn_charter.pdf', fileSize: '1.7 MB', uploadedAt: '2024-03-01', status: 'APPROVED' }
     ],
     auditTrail: [
-      { id: 'at-9', churchId: 'c6', churchName: '[DEMO] Coastal Chapel', action: 'CHURCH_VERIFIED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2024-03-05 11:30', details: 'DEMO record: sample affiliation check' }
+      { id: 'at-9', churchId: 'c6', churchName: 'Coastal Chapel', action: 'CHURCH_VERIFIED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2024-03-05 11:30', details: 'DEMO record: sample affiliation check' }
     ]
   },
   {
     id: 'c7',
-    name: '[DEMO] Capital Fellowship',
+    name: 'Capital Fellowship',
     denomination: 'Evangelical',
     pastor: 'Demo Pastor J. Samuel',
     email: 'demo-capital@example.test',
@@ -288,12 +288,12 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd12', name: 'Society Registration', type: 'REGISTRATION_CERTIFICATE', fileName: 'delhi_society_reg.pdf', fileSize: '2.5 MB', uploadedAt: '2024-01-30', status: 'APPROVED' }
     ],
     auditTrail: [
-      { id: 'at-10', churchId: 'c7', churchName: '[DEMO] Capital Fellowship', action: 'CHURCH_VERIFIED', reviewer: 'Demo Platform Admin', role: 'PLATFORM_ADMIN', timestamp: '2024-02-02 09:30', details: 'DEMO record: sample approval' }
+      { id: 'at-10', churchId: 'c7', churchName: 'Capital Fellowship', action: 'CHURCH_VERIFIED', reviewer: 'Demo Platform Admin', role: 'PLATFORM_ADMIN', timestamp: '2024-02-02 09:30', details: 'DEMO record: sample approval' }
     ]
   },
   {
     id: 'c8',
-    name: '[DEMO] Lakeside Gathering',
+    name: 'Lakeside Gathering',
     denomination: 'Pentecostal',
     pastor: 'Demo Pastor M. Thomas',
     email: 'demo-lakeside@example.test',
@@ -323,13 +323,13 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd13', name: 'Local Lease Agreement Copy', type: 'OTHER', fileName: 'lease_deed_scan.jpg', fileSize: '650 KB', uploadedAt: '2024-09-15', status: 'REJECTED' }
     ],
     auditTrail: [
-      { id: 'at-11', churchId: 'c8', churchName: '[DEMO] Lakeside Gathering', action: 'CHURCH_REGISTERED', reviewer: 'Demo Applicant', role: 'APPLICANT', timestamp: '2024-09-15 14:00', details: 'DEMO record: sample application submitted without society deed' },
-      { id: 'at-12', churchId: 'c8', churchName: '[DEMO] Lakeside Gathering', action: 'CHURCH_REJECTED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2024-09-20 11:15', reason: 'DEMO rejection: missing sample trust/society certificate; lease agreement is unnotarized.', details: 'DEMO record: applicant would be notified to resubmit. Not a live compliance action.' }
+      { id: 'at-11', churchId: 'c8', churchName: 'Lakeside Gathering', action: 'CHURCH_REGISTERED', reviewer: 'Demo Applicant', role: 'APPLICANT', timestamp: '2024-09-15 14:00', details: 'DEMO record: sample application submitted without society deed' },
+      { id: 'at-12', churchId: 'c8', churchName: 'Lakeside Gathering', action: 'CHURCH_REJECTED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2024-09-20 11:15', reason: 'DEMO rejection: missing sample trust/society certificate; lease agreement is unnotarized.', details: 'DEMO record: applicant would be notified to resubmit. Not a live compliance action.' }
     ]
   },
   {
     id: 'c9',
-    name: '[DEMO] Heritage Parish',
+    name: 'Heritage Parish',
     denomination: 'Catholic',
     pastor: 'Demo Pastor J. Varghese',
     email: 'demo-heritage@example.test',
@@ -363,12 +363,12 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd14', name: 'Archdiocese Official Decree', type: 'MINISTRY_LICENSE', fileName: 'archdiocese_decree.pdf', fileSize: '4.2 MB', uploadedAt: '2023-11-10', status: 'APPROVED' }
     ],
     auditTrail: [
-      { id: 'at-13', churchId: 'c9', churchName: '[DEMO] Heritage Parish', action: 'CHURCH_VERIFIED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2023-11-15 10:00', details: 'DEMO record: sample heritage parish approval' }
+      { id: 'at-13', churchId: 'c9', churchName: 'Heritage Parish', action: 'CHURCH_VERIFIED', reviewer: 'Demo Super Admin', role: 'SUPER_ADMIN', timestamp: '2023-11-15 10:00', details: 'DEMO record: sample heritage parish approval' }
     ]
   },
   {
     id: 'c10',
-    name: '[DEMO] Tech Corridor Fellowship',
+    name: 'Tech Corridor Fellowship',
     denomination: 'Pentecostal',
     pastor: 'Demo Pastor C. Dan',
     email: 'demo-corridor@example.test',
@@ -399,7 +399,7 @@ export const INITIAL_MOCK_CHURCHES: Church[] = [
       { id: 'd16', name: 'Pastor Government ID & Aadhaar', type: 'GOVT_ID', fileName: 'pastor_caleb_id.pdf', fileSize: '720 KB', uploadedAt: '2024-10-17', status: 'PENDING' }
     ],
     auditTrail: [
-      { id: 'at-14', churchId: 'c10', churchName: '[DEMO] Tech Corridor Fellowship', action: 'CHURCH_REGISTERED', reviewer: 'Demo Applicant', role: 'APPLICANT', timestamp: '2024-10-17 11:35', details: 'DEMO record: self-onboarding with 2 pending sample documents' }
+      { id: 'at-14', churchId: 'c10', churchName: 'Tech Corridor Fellowship', action: 'CHURCH_REGISTERED', reviewer: 'Demo Applicant', role: 'APPLICANT', timestamp: '2024-10-17 11:35', details: 'DEMO record: self-onboarding with 2 pending sample documents' }
     ]
   }
 ];
@@ -419,7 +419,15 @@ export function getStoredChurches(): Church[] {
       return seed;
     }
     const parsed = JSON.parse(data) as Church[];
-    return parsed.map(normalizeChurch);
+    const normalized = parsed.map(normalizeChurch);
+    if (JSON.stringify(parsed) !== JSON.stringify(normalized)) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+      } catch (e) {
+        console.error('Could not persist normalized church records to localStorage:', e);
+      }
+    }
+    return normalized;
   } catch (e) {
     console.error('Error reading churches from localStorage:', e);
     return seed;

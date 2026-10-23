@@ -123,7 +123,7 @@ export default function AuditLogsPage() {
           gridTemplateColumns: '1fr 220px auto',
           gap: 12,
           marginBottom: 20
-        }}>
+        }} className="audit-filter-toolbar">
           <div style={{ position: 'relative' }}>
             <Search
               size={18}
@@ -213,6 +213,7 @@ export default function AuditLogsPage() {
               return (
                 <div
                   key={log.id}
+                  className="audit-log-entry"
                   style={{
                     borderLeft: `4px solid ${borderLeftColor}`,
                     backgroundColor: '#F8FAFC',
@@ -224,7 +225,7 @@ export default function AuditLogsPage() {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 10 }}>
                     <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <div className="audit-log-title-row" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                         <span style={{
                           backgroundColor: badgeBg,
                           color: badgeText,

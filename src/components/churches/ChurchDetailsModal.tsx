@@ -38,7 +38,7 @@ export default function ChurchDetailsModal({
   if (!church) return null;
 
   return (
-    <div style={{
+    <div className="church-profile-overlay" style={{
       position: 'fixed',
       inset: 0,
       backgroundColor: 'rgba(15, 23, 42, 0.65)',
@@ -49,7 +49,7 @@ export default function ChurchDetailsModal({
       zIndex: 1000,
       padding: 20
     }}>
-      <div style={{
+      <div className="church-profile-modal" style={{
         backgroundColor: '#FFFFFF',
         width: '100%',
         maxWidth: 820,
@@ -62,7 +62,7 @@ export default function ChurchDetailsModal({
         animation: 'fadeIn 0.2s ease-out'
       }}>
         {/* Header Banner */}
-        <div style={{
+        <div className="church-profile-header" style={{
           padding: '24px 28px',
           background: 'linear-gradient(135deg, #3D1A6E 0%, #5B2D8E 100%)',
           color: 'white',
@@ -91,7 +91,7 @@ export default function ChurchDetailsModal({
           </button>
 
           <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
-            <div style={{
+            <div className="church-profile-avatar" style={{
               width: 72,
               height: 72,
               borderRadius: 18,
@@ -165,7 +165,7 @@ export default function ChurchDetailsModal({
         </div>
 
         {/* Navigation Tabs */}
-        <div style={{
+        <div className="church-profile-tabs" style={{
           display: 'flex',
           borderBottom: '1px solid #E5E7EB',
           padding: '0 24px',
@@ -199,7 +199,7 @@ export default function ChurchDetailsModal({
         </div>
 
         {/* Tab Content Area */}
-        <div style={{ padding: 24, overflowY: 'auto', flex: 1 }}>
+        <div className="church-profile-body" style={{ padding: 24, overflowY: 'auto', flex: 1 }}>
           {/* TAB 1: OVERVIEW */}
           {activeTab === 'overview' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>

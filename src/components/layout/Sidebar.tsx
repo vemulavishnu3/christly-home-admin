@@ -10,7 +10,8 @@ import {
   ClipboardList,
   Users,
   IndianRupee,
-  Settings
+  Settings,
+  MoreHorizontal
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { getStoredChurches } from '../../data/mockChurches';
@@ -33,6 +34,7 @@ const secondaryNavItems = [
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
   const pathname = usePathname();
   const [pendingCount, setPendingCount] = useState<number>(0);
+  const [moreOpen, setMoreOpen] = useState(false);
 
   useEffect(() => {
     const updateCount = () => {
@@ -44,10 +46,8 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
     return () => window.removeEventListener('churches_updated', updateCount);
   }, []);
 
-  if (!isOpen) return null;
-
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${!isOpen ? styles.sidebarClosed : ''}`}>
       <div className={styles.logo}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{
@@ -137,6 +137,63 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
             </Link>
           );
         })}
+      </nav>
+
+      <nav className={styles.mobileNav} aria-label="Primary navigation">
+        {primaryNavItems.slice(0, 3).map((item) => {
+          const Icon = item.icon;
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isActive ? 'page' : undefined}
+              className={`${styles.mobileNavItem} ${isActive ? styles.mobileNavActive : ''}`}
+            >
+              <span className={styles.mobileNavIcon}>
+                <Icon size={20} />
+                {item.showBadge && pendingCount > 0 && (
+                  <span className={styles.mobileBadge}>{pendingCount}</span>
+                )}
+              </span>
+              <span>{item.label === 'Church Management' ? 'Churches' : item.label === 'Church Verification' ? 'Verify' : item.label}</span>
+            </Link>
+          );
+        })}
+        <button
+          type="button"
+          aria-expanded={moreOpen}
+          aria-haspopup="menu"
+          aria-current={['/admin/churches/new', '/admin/audit-logs', '/admin/users', '/admin/donations'].some(href => pathname.startsWith(href)) ? 'page' : undefined}
+          onClick={() => setMoreOpen(open => !open)}
+          className={`${styles.mobileNavItem} ${
+            moreOpen || ['/admin/churches/new', '/admin/audit-logs', '/admin/users', '/admin/donations'].some(href => pathname.startsWith(href))
+              ? styles.mobileNavActive
+              : ''
+          }`}
+        >
+          <span className={styles.mobileNavIcon}><MoreHorizontal size={20} /></span>
+          <span>More</span>
+        </button>
+        {moreOpen && (
+          <div className={styles.moreMenu} role="menu">
+            {[...primaryNavItems.slice(3), ...secondaryNavItems.filter(item => item.href !== '/admin/settings')].map(item => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  role="menuitem"
+                  onClick={() => setMoreOpen(false)}
+                  className={styles.moreMenuItem}
+                >
+                  <Icon size={18} />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </nav>
     </aside>
   );

@@ -42,3 +42,141 @@
   background: rgba(255,255,255,0.2);
   color: white;
 }
+
+.sidebarClosed {
+  display: none;
+}
+
+.mobileNav {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    position: fixed;
+    z-index: 100;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    padding: 0 8px env(safe-area-inset-bottom);
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.97);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -4px 18px rgba(23, 37, 84, 0.08);
+    backdrop-filter: blur(16px);
+  }
+
+  .sidebarClosed {
+    display: block;
+  }
+
+  .logo,
+  .nav {
+    display: none;
+  }
+
+  .mobileNav {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    min-height: 64px;
+    padding-top: 4px;
+  }
+
+  .mobileNavItem {
+    display: flex;
+    min-width: 0;
+    min-height: 56px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 5px 2px;
+    color: #687386;
+    background: transparent;
+    border: 0;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .mobileNavIcon {
+    position: relative;
+    display: grid;
+    width: 28px;
+    height: 26px;
+    place-items: center;
+  }
+
+  .mobileNavActive {
+    color: #172554;
+  }
+
+  .mobileNavActive .mobileNavIcon {
+    width: 48px;
+    background: #edf1fa;
+    border-radius: 999px;
+  }
+
+  .mobileBadge {
+    position: absolute;
+    top: -4px;
+    right: -5px;
+    display: grid;
+    min-width: 16px;
+    height: 16px;
+    place-items: center;
+    padding: 0 4px;
+    color: white;
+    background: #c24132;
+    border: 2px solid white;
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .moreMenu {
+    position: fixed;
+    right: 12px;
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    left: 12px;
+    display: grid;
+    gap: 4px;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.2);
+  }
+
+  .moreMenuItem {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px;
+    color: #26344e;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .moreMenuItem:active {
+    background: #f3f5f9;
+  }
+
+  .mobileNavItem:focus-visible,
+  .moreMenuItem:focus-visible {
+    outline: 3px solid rgba(51, 75, 131, 0.4);
+    outline-offset: 2px;
+  }
+}

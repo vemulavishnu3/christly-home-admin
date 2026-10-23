@@ -40,7 +40,7 @@ export default function RejectionModal({
   };
 
   return (
-    <div style={{
+    <div className="rejection-modal-overlay" style={{
       position: 'fixed',
       inset: 0,
       backgroundColor: 'rgba(15, 23, 42, 0.7)',
@@ -51,7 +51,7 @@ export default function RejectionModal({
       zIndex: 1100,
       padding: 16
     }}>
-      <div style={{
+      <div className="rejection-modal" style={{
         backgroundColor: '#FFFFFF',
         width: '100%',
         maxWidth: 520,

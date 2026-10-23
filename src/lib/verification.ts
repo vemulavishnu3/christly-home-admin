@@ -36,8 +36,15 @@ export function normalizeChurch(church: Church): Church {
     church.verificationStatus,
     church.status
   );
+  const cleanChurchName = (name: string) =>
+    name.replace(/^\s*\[DEMO\]\s*/i, '').replace(/\s*\(demo\)\s*$/i, '').trim();
   return {
     ...church,
+    name: cleanChurchName(church.name),
+    auditTrail: church.auditTrail.map(record => ({
+      ...record,
+      churchName: cleanChurchName(record.churchName)
+    })),
     verificationStatus,
     status: legacyStatusFromCanonical(verificationStatus),
     isVerified: verificationStatus === 'approved'
